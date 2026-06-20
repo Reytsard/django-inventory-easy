@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>item: {{ item.id }}</title>
+</head>
+<body>
+{% if item %}
+    <h2>{{ item.name }}</h2>
+    <h3>Price: {{ item.price }}</h3>
+    <h4>Quantity: {{ item.quantity }}</h4>
+    <p>Category: {{ item.category.name }}</p>
+{% endif %}
+</body>
+</html>
