@@ -3,7 +3,7 @@ from django.http import HttpResponse, Http404
 from django.template import loader
 from django.shortcuts import render
 
-from .models import Item, User
+from .models import Item, User, Suggestion
 
 
 # Create your views here.
@@ -33,6 +33,24 @@ def item_details(request, item_id):
 
     #can also use
     item = get_object_or_404(Item, pk=item_id)
+    # suggestions
 
     return render(request, "polls/details.html", {"item": item})
+
+def item_suggest(request, item_id):
+    item = get_object_or_404(Item, pk=item_id)
+    try:
+        suggestions_text = item.suggestion_set.get(pk=request.POST["suggestion-text"])
+    except (KeyError, Item.DoesNotExist):
+        return render(
+            request,
+            "polls/details.html",
+            {
+                "error_message":"There is no such Item",
+                "item":item
+            }
+        )
+    else:
+        suggestions_text.save()
+
 

@@ -42,3 +42,13 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+class Suggestion(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    # from_user = models.ForeignKey(User, on_delete=models.CASCADE)
+    suggestion = models.TextField(max_length=300)
+    date_added = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.suggestion

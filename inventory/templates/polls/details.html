@@ -11,5 +11,16 @@
     <h4>Quantity: {{ item.quantity }}</h4>
     <p>Category: {{ item.category.name }}</p>
 {% endif %}
+<h3>Add Suggestion:</h3>
+<form action="{% url 'item_suggest' item.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend><h1>{{ item.name }}</h1></legend>
+        {% if error_message %} <p><strong>{{ error_message }}</strong></p> {% endif %}
+        <input type="text" name="suggestion-text"/>
+{#        <input type="text" readonly disabled value="{{  }}"#}
+    </fieldset>
+<input type="submit" value="submit"/>
+</form>
 </body>
 </html>
